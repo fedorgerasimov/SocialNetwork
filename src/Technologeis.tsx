@@ -1,15 +1,14 @@
 import React from "react";
 
-export const Technologeis = () => {
+type TechnologeisList = {
+    list: string
+}
+export const Technologeis = (props: TechnologeisList) => {
     return (<div>
             <ul>
-                <li>css</li>
-                <li>html</li>
-                <li>js</li>
-                <li>react</li>
+                <li>{props.list}</li>
             </ul>
         </div>
-
     )
 }
 
