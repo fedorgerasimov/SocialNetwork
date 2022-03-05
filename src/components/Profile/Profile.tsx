@@ -1,24 +1,18 @@
 import React from "react";
+import s from './Profile.module.css'
+import MyPosts from "./MyPosts/MyPosts";
 
 function Profile() {
     return (
-        <div className="content">
+        <div className={s.content}>
             <div>
                 <img src="http://priroda.su/wp-content/uploads/2016/03/les.jpg" alt="forest"/>
             </div>
             <div>
                 ava + description
             </div>
-            <div>
-                My post
-                <div>
-                    New post</div>
-                <div>
-                    <div>post1</div>
-                    <div>post2</div>
-                </div>
+            <MyPosts/>
             </div>
-        </div>
     )
 }
 
