@@ -1,5 +1,20 @@
-/*
-.content {
-    grid-area: auto;
-    background-color: #86baee;
-}*/
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogsItems {
+    padding: 10px;
+}
+
+.dialogsItems .active {
+    color: brown;
+}
+
+.messages {
+    padding: 10px;
+}
+
+.messages .message {
+
+}
