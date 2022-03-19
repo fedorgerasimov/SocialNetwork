@@ -16,7 +16,7 @@ const App = (props: any) => {
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path='/dialogs'component={Dialogs}/>
+                <Route path='/dialogs'component={Dialogs}/>  {/*Route exact path */}
                 <Route path='/profile' component={Profile}/>
                 <Route path='/music' component={Music}/>
              {/*   <Route path='/music' component={Music}/>
