@@ -3,7 +3,7 @@ import s from './Post.module.css'
 
 type PostType = {
     message: string
-    likeCount?: number
+    likesCount?: number
 }
 
 const Post = (props: PostType) => {
@@ -14,7 +14,7 @@ const Post = (props: PostType) => {
                 {props.message}
             </div>
             <div>
-                <span>{props.likeCount}</span>
+                <span>{props.likesCount}</span>
             </div>
         </div>
     )

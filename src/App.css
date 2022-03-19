@@ -1,4 +1,4 @@
-.app_wrapper {
+.app-wrapper {
     margin: 0 auto;
     width: 100%;
     grid-template-areas:
@@ -8,4 +8,8 @@
     grid-template-rows: 60px 1fr;
     grid-template-columns: 2fr 10fr;
     /* grid-gap: 10px;*/
+}
+.app-wrapper-content {
+    grid-area: content;
+    background-color: #86baee;
 }
