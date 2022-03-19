@@ -2,7 +2,11 @@ import React from "react";
 import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 
-function Profile() {
+type ProfileType = {
+
+}
+
+function Profile(props: any) {
     return (
         <div>
             <div>
