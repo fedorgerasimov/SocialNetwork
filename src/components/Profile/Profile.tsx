@@ -12,7 +12,7 @@ function Profile() {
                 ava + description
             </div>
             <MyPosts/>
-            </div>
+        </div>
     )
 }
 
