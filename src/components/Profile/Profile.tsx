@@ -6,7 +6,7 @@ function Profile() {
     return (
         <div className={s.content}>
             <div>
-                <img src="http://priroda.su/wp-content/uploads/2016/03/les.jpg" alt="forest"/>
+                <img src="https://anjalisk96.files.wordpress.com/2017/09/top-social-networking-sites.jpg?w=693&zoom=2" alt="social-network"/>
             </div>
             <div>
                 ava + description
