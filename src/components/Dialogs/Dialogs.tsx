@@ -11,11 +11,11 @@ type MessageType = {
 }
 
 export const DialogItem = (props: DialogsType) => {
-    let path ='/dialogs/'+props.id;  // можно присвоить через переменную
+    let path =`${/dialogs/} ${props.id}`;  // можно присвоить через переменную
     return (
     <div className={`${s.dialog} ${s.active}`}>
         {/*<NavLink to={path}>{props.name}</NavLink>*/}
-        <NavLink to={`${/dialogs/} ${props.id}`}>{props.name}</NavLink>
+        <NavLink to={'/dialogs/'+props.id}>{props.name}</NavLink>
     </div>
     )
 }
@@ -24,14 +24,25 @@ export const Message = (props:MessageType) => {
     return <div className={s.message}>{props.message}</div>
 }
 
-export const Dialogs = () => {
+export const Dialogs = (props:any) => {
+
+    let dialogsData = [
+        {id: 1, name: 'Jameson'},
+        {id: 2, name: 'Bob'},
+        {id: 3, name: 'Jane'},
+        {id: 4, name: 'Arnold'},]
+    
+    let messagesData = [
+        {id: 1, message:'What\'s up?'},
+        {id: 2, message:'What is your hobby?'},
+        {id: 3, message:'Hello'}]
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <DialogItem id={1} name={'Jameson'}/>
-                <DialogItem id={2} name={'Bob'}/>
-                <DialogItem id={3} name={'Jane'}/>
-                <DialogItem id={4} name={'Arnold'}/>
+                <DialogItem name={dialogsData[0].name} id={dialogsData[0].id}/>
+                <DialogItem name={dialogsData[1].name} id={dialogsData[1].id}/>
+
 {/*             <div className={`${s.dialog} ${s.active}`}>
                     <NavLink to='/dialogs/1'>Jameson</NavLink>
                 </div>
@@ -46,9 +57,9 @@ export const Dialogs = () => {
                 </div>*/}
             </div>
             <div className={s.messages}>
-                <Message message={'What\'s up?'}/>
-                <Message message={'What is your hobby?'}/>
-                <Message message={'Hello'}/>
+                <Message message={messagesData[0].message}/>
+                <Message message={messagesData[1].message}/>
+
 {/*                <div className={s.message}>What's up?</div>
                 <div className={s.message}>What is your hobby?</div>
                 <div className={s.message}>Hello</div>*/}
