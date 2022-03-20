@@ -8,9 +8,11 @@ type MyPostsType = {
 
 const MyPosts = (props:any) => {
 
-    let postData = [
+    let postsData = [
         {id: 1, message:'Hi, what is favourite movie?', likesCount: 20},
         {id: 2, message:'It\'s the best social network you have ever seen',likesCount: 15}]
+
+    let postsElement = postsData.map(el => <Post message={el.message} likesCount={el.likesCount}/>)
 
     return (
         <div className={s.postsBlock}>
@@ -26,8 +28,9 @@ const MyPosts = (props:any) => {
 
             </div>
             <div className={s.posts}>
-                <Post message={postData[0].message} likesCount={postData[0].likesCount}/>
-                <Post message={postData[1].message} likesCount={postData[1].likesCount}/>
+                {postsElement}
+                {/*<Post message={postsData[0].message} likesCount={postsData[0].likesCount}/>
+                <Post message={postsData[1].message} likesCount={postsData[1].likesCount}/>*/}
 
             </div>
         </div>
