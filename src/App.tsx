@@ -19,10 +19,11 @@ const App: React.FC<any> = (props) => {
                 <Route path='/dialogs' component={Dialogs}/>  Route exact path
 */}
                     <Route path='/dialogs' render={() => <Dialogs
+                      /*  state={props.state.dialogsPage}*/
                         dialogs={props.state.dialogsPage.dialogs}
                         messages={props.state.dialogsPage.messages}/>}/>
-                    <Route path='/profile' render={() => <Profile
-                        posts={props.state.profilePage.posts}/>}/>
+                    <Route path='/profile' render={() => <Profile state={props.state.profilePage}
+                        /*posts={props.state.profilePage.posts}*//>}/>
                     <Route path='/music' render={() => <Music/>}/>
                 </div>
             </div>

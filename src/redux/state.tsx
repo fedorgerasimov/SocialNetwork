@@ -1,6 +1,32 @@
 import React from "react";
+type PostsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+type DialogsType = {
+    id : number
+    name : string
+}
+type MessagesType ={
+    id : number
+    message : string
+}
+export type ProfilePageType = {
+    posts : Array<PostsType>
+}
+export type DialogsPageType ={
+    dialogs : Array<DialogsType>
+    messages: Array<MessagesType>    
+}
+type SidebarType = {}
+export type StateType ={
+    profilePage : ProfilePageType
+    dialogsPage : DialogsPageType
+    sidebar: SidebarType
+}
 
-export const state = {
+export const state : StateType = {
     profilePage : {
         posts : [
             {id: 1, message:'Hi, what is favourite movie?', likesCount: 20},
@@ -18,5 +44,6 @@ export const state = {
             {id: 1, message: 'What\'s up?'},
             {id: 2, message: 'What is your hobby?'},
             {id: 3, message: 'Hello'}]
-    }
+    },
+    sidebar: {}
 }

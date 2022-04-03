@@ -1,8 +1,10 @@
 import React from 'react';
 import s from './MyPosts.module.css'
 import Post from "./Posts/Post";
+import {ProfilePageType} from "../../../redux/state";
 
-export type postsType = {
+/*
+type postsType = {
     message: string
     likesCount: number
     id:number
@@ -12,8 +14,9 @@ export type postsType = {
 export type MyPostsPropsType = {
     posts : Array<postsType>
 }
+*/
 
-const MyPosts:React.FC<MyPostsPropsType> = (props) => {
+const MyPosts:React.FC<ProfilePageType> = (props) => {
 
 /*    let postsData = [
         {id: 1, message:'Hi, what is favourite movie?', likesCount: 20},
