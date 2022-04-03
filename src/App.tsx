@@ -2,14 +2,21 @@ import React from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import {Dialogs} from "./components/Dialogs/Dialogs";
+import {Dialogs, DialogsPropsType} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import Profile from "./components/Profile/Profile";
 import {Music} from "./components/Navbar/Music/Music";
+import {MyPostsPropsType} from "./components/Profile/MyPosts/MyPosts";
 
-const SomeComponent = () => <Dialogs/>
 
-const App = (props: any) => {
+/*const SomeComponent = () => <Dialogs/>*/
+
+type AppPropsType = {
+
+}
+
+const App: React.FC<any> = (props) => {
+
     return (
         <BrowserRouter> {/*нужно всё обернуть <BrowserRouter>, по другому не работает*/}
         <div className="app-wrapper">
@@ -18,11 +25,9 @@ const App = (props: any) => {
             <div className='app-wrapper-content'>
 {/*
                 <Route path='/dialogs' component={Dialogs}/>  Route exact path
-                <Route path='/profile' component={Profile}/>
-                <Route path='/music' component={Music}/>
 */}
-                <Route path='/dialogs' render={()=> <Dialogs/>}/>
-                <Route path='/profile' render={()=> <Profile/>}/>
+                <Route path='/dialogs' render={()=> <Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
+                <Route path='/profile' render={()=> <Profile posts={props.posts}/>}/>
                 <Route path='/music' render={()=> <Music/>}/>
 
 
