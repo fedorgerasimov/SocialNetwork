@@ -2,10 +2,6 @@ import React from "react";
 import s from './ProfileInfo.module.css'
 
 
-type ProfileInfo = {
-
-}
-
 export const  ProfileInfo =(props: any) =>{
     return (
         <div>

@@ -1,10 +1,10 @@
 import React from "react";
 import s from './Profile.module.css'
-import MyPosts, {MyPostsPropsType} from "./MyPosts/MyPosts";
+import MyPosts from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 
-function Profile(props: MyPostsPropsType ) {
+function Profile(props: any ) {
 
     return (
         <div>
