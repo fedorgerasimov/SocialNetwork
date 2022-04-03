@@ -1,14 +1,14 @@
 import React from "react";
-type PostsType = {
+export type PostsType = {
     id: number
     message: string
     likesCount: number
 }
-type DialogsType = {
+export type DialogsType = {
     id : number
     name : string
 }
-type MessagesType ={
+export type MessagesType ={
     id : number
     message : string
 }
@@ -19,7 +19,7 @@ export type DialogsPageType ={
     dialogs : Array<DialogsType>
     messages: Array<MessagesType>    
 }
-type SidebarType = {}
+export type SidebarType = {}
 export type StateType ={
     profilePage : ProfilePageType
     dialogsPage : DialogsPageType
