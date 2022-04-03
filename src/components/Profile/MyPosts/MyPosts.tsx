@@ -2,7 +2,7 @@ import React from 'react';
 import s from './MyPosts.module.css'
 import Post from "./Posts/Post";
 
-export type PostType = {
+export type postsType = {
     message: string
     likesCount: number
     id:number
@@ -10,7 +10,7 @@ export type PostType = {
 
 
 export type MyPostsPropsType = {
-    posts : Array<PostType>
+    posts : Array<postsType>
 }
 
 const MyPosts:React.FC<MyPostsPropsType> = (props) => {

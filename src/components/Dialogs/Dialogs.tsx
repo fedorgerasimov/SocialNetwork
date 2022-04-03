@@ -3,19 +3,19 @@ import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 
-export type DialogsDataType = {
+export type dialogsType = {
     id: number
     name: string
 }
 
-export type MessageDataType = {
+export type messageType = {
     id: number
     message: string
 }
 
 export type DialogsPropsType = {
-    dialogs: Array<DialogsDataType>
-    messages: Array<MessageDataType>
+    dialogs: Array<dialogsType>
+    messages: Array<messageType>
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
