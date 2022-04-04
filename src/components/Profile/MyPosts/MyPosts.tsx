@@ -14,7 +14,7 @@ const MyPosts:React.FC<MyPostsProps> = (props) => {
         {id: 1, message:'Hi, what is favourite movie?', likesCount: 20},
         {id: 2, message:'It\'s the best social network you have ever seen',likesCount: 15}]*/
 
-    let postsElement = props.posts.map(el => <Post key={el.id} id={el.id} message={el.message} likesCount={el.likesCount}/>)
+    let postsElement = props.posts.map(el => <Post key={el.id} id={el.id} message={el.message} likesCount={el.likesCount} avatar={el.avatar}/>)
 
     return (
         <div className={s.postsBlock}>
