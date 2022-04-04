@@ -16,15 +16,21 @@ const MyPosts:React.FC<MyPostsProps> = (props) => {
 
     let postsElement = props.posts.map(el => <Post key={el.id} id={el.id} message={el.message} likesCount={el.likesCount} avatar={el.avatar}/>)
 
+    let newPostElement = React.createRef<HTMLTextAreaElement>()  // неявная типизация
+
+    const addPost = () => {
+        alert(newPostElement.current?.value)   // if (newPostElement.current) {alert(newPostElement.current.value) }
+    }
+
     return (
         <div className={s.postsBlock}>
             <h2>My posts</h2>
             <div>
                 <div>
-                    <textarea></textarea>
+                    <textarea ref={newPostElement}></textarea>
                 </div>
                 <div>
-                    <button>Add post</button>
+                    <button onClick={addPost}>Add post</button>
                     <button>Remove</button>
                 </div>
 
