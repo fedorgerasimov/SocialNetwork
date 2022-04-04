@@ -7,6 +7,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import Profile from "./components/Profile/Profile";
 import {Music} from "./components/Navbar/Music/Music";
 import {StateType} from "./redux/state";
+import {Sidebar} from "./components/Sidebar/Sidebar";
 
 type AppProps = {
     stateData: StateType
@@ -19,6 +20,7 @@ const App: React.FC<AppProps> = (props) => {
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
+                    <Route path='/sidebar' render={() => <Sidebar stateData={props.stateData.sidebar}/>}/>
                     {/*<Route path='/dialogs' component={Dialogs}/>  Route exact path*/}
                     <Route path='/dialogs' render={() => <Dialogs stateData={props.stateData.dialogsPage}/>}/>
                     <Route path='/profile' render={() => <Profile stateData={props.stateData.profilePage}/>}/>  {/*posts={props.stateData.profilePage.posts}*/}

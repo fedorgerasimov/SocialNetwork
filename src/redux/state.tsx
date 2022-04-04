@@ -25,13 +25,13 @@ export type DialogsPageType ={
     dialogs : Array<DialogsType>
     messages: Array<MessagesType>    
 }
-export type SidebarType = {
+export type SidebarPageType = {
     friendsPage: Array<FriendsType>
 }
 export type StateType ={
     profilePage : ProfilePageType
     dialogsPage : DialogsPageType
-    sidebar: SidebarType
+    sidebar: SidebarPageType
 }
 
 export const state : StateType = {

@@ -15,7 +15,7 @@ export const Dialogs = (props: DialogsProps) => {
         [<DialogItem name={props.dialogs[0].name} id={props.dialogs[0].id}/>,
             <DialogItem name={props.dialogs[1].name} id={props.messages[1].id}/>] //переписал на метод map*/
 
-    const dialogsElements = props.stateData.dialogs.map(el => <DialogItem  id={el.id} name={el.name}/>)
+    const dialogsElements = props.stateData.dialogs.map(el => <DialogItem key={el.id}  id={el.id} name={el.name}/>)
 
     const messagesElements = props.stateData.messages.map(el => <Message message={el.message}/>)
 
