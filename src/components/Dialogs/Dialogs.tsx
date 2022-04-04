@@ -2,39 +2,22 @@ import React from "react";
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogsPageType, DialogsType, MessagesType} from "../../redux/state";
-
-/*export type dialogsType = {
-    id: number
-    name: string
-}
-
-export type messageType = {
-    id: number
-    message: string
-}
-
-export type DialogsPropsType = {
-    dialogs: Array<dialogsType>
-    messages: Array<messageType>
-}*/
+import {DialogsPageType} from "../../redux/state";
 
 type DialogsProps = {
-    dialogs: Array<DialogsType>
-    messages: Array<MessagesType>
-    /*state : DialogsPageType*/
+    //dialogs: Array<DialogsType>
+    //messages: Array<MessagesType>
+    stateData : DialogsPageType
 }
 
 export const Dialogs = (props: DialogsProps) => {
-
-
-   /* const dialogsElements1 =
+    /* const dialogsElements1 =
         [<DialogItem name={props.dialogs[0].name} id={props.dialogs[0].id}/>,
             <DialogItem name={props.dialogs[1].name} id={props.messages[1].id}/>] //переписал на метод map*/
 
-    const dialogsElements = props.dialogs.map(el => <DialogItem  id={el.id} name={el.name}/>)
+    const dialogsElements = props.stateData.dialogs.map(el => <DialogItem  id={el.id} name={el.name}/>)
 
-    const messagesElements = props.messages.map(el => <Message message={el.message}/>)
+    const messagesElements = props.stateData.messages.map(el => <Message message={el.message}/>)
 
     return (
         <div className={s.dialogs}>

@@ -3,16 +3,6 @@ import s from './MyPosts.module.css'
 import Post from "./Posts/Post";
 import {PostsType, ProfilePageType} from "../../../redux/state";
 
-/*
-type postsType = {
-    message: string
-    likesCount: number
-    id:number
-}
-export type MyPostsPropsType = {
-    posts : Array<postsType>
-}
-*/
 
 type MyPostsProps = {
     posts: Array<PostsType>
