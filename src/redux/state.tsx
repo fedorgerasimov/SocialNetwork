@@ -61,3 +61,14 @@ export const state : StateType = {
         ]
     }
 }
+
+
+export const addPost =(postMessage: string ) => {
+    const newPost: PostsType = {
+        id : new Date().getTime(),
+        message: postMessage,
+        likesCount: 5,
+        avatar: 'https://cdn4.iconfinder.com/data/icons/emojis-flat-pixel-perfect/64/emoji-64-512.png'
+    }
+    state.profilePage.posts.push(newPost)
+}

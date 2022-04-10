@@ -6,6 +6,7 @@ import {PostsType, ProfilePageType} from "../../../redux/state";
 
 type MyPostsProps = {
     posts: Array<PostsType>
+    addPostCallback: (postMessage: string )=> void
 }
 
 const MyPosts:React.FC<MyPostsProps> = (props) => {
@@ -18,8 +19,13 @@ const MyPosts:React.FC<MyPostsProps> = (props) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()  // неявная типизация
 
-    const addPost = () => {
-        alert(newPostElement.current?.value)   // if (newPostElement.current) {alert(newPostElement.current.value) }
+    const addPostHandler = () => {
+        //const text =(newPostElement.current?.value)   // if (newPostElement.current) {alert(newPostElement.current.value) }
+        //alert(text)
+        //props.addPostCallback(newPostElement.current?.value as string)
+        if (newPostElement.current) {
+            props.addPostCallback(newPostElement.current.value)
+        }
     }
 
     return (
@@ -30,7 +36,7 @@ const MyPosts:React.FC<MyPostsProps> = (props) => {
                     <textarea ref={newPostElement}></textarea>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={addPostHandler}>Add post</button>
                     <button>Remove</button>
                 </div>
 
