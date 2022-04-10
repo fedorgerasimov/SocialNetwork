@@ -38,7 +38,7 @@ export type StateType ={
 
 export const state : StateType = {
     profilePage : {
-        messageForNewPost: 'www',
+        messageForNewPost: '',
         posts : [
             {id: 1, message:'Hi, what is favourite movie?', likesCount: 20, avatar: "https://cdn4.iconfinder.com/data/icons/smileys-for-fun/128/smiley__9-512.png"},
             {id: 2, message:'It\'s the best social network you have ever seen',likesCount: 15, avatar: "https://cdn4.iconfinder.com/data/icons/smileys-for-fun/128/smiley__12-512.png"},
@@ -74,5 +74,10 @@ export const addPost =(postMessage: string ) => {
         avatar: 'https://cdn4.iconfinder.com/data/icons/emojis-flat-pixel-perfect/64/emoji-64-512.png'
     }
     state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state)
+}
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.messageForNewPost = newText
     rerenderEntireTree(state)
 }

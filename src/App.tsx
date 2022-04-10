@@ -6,12 +6,13 @@ import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import Profile from "./components/Profile/Profile";
 import {Music} from "./components/Navbar/Music/Music";
-import {StateType} from "./redux/state";
+import {StateType, updateNewPostText} from "./redux/state";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 
 type AppProps = {
     stateData: StateType
-    addPost: (postMessage: string)=> void
+    addPost: (postMessage: string )=> void
+    updateNewPostText:(newText: string) => void
 }
 
 const App: React.FC<AppProps> = (props) => {
@@ -25,6 +26,7 @@ const App: React.FC<AppProps> = (props) => {
                     {/*<Route path='/dialogs' component={Dialogs}/>  Route exact path*/}
                     <Route path='/dialogs' render={() => <Dialogs stateData={props.stateData.dialogsPage}/>}/>
                     <Route path='/profile' render={() => <Profile profilePage={props.stateData.profilePage}
+                                                                  updateNewPostTextCallback={props.updateNewPostText}
                                                                   addPostCallback={props.addPost}/>}/>  {/*posts={props.stateData.profilePage.posts}*/}
                     <Route path='/music' render={() => <Music/>}/>
                 </div>
