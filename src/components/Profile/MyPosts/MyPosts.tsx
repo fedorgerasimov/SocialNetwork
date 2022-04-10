@@ -22,10 +22,12 @@ const MyPosts:React.FC<MyPostsProps> = (props) => {
     const addPostHandler = () => {
         //const text =(newPostElement.current?.value)   // if (newPostElement.current) {alert(newPostElement.current.value) }
         //alert(text)
-        //props.addPostCallback(newPostElement.current?.value as string)
+        //props.addPostCallback(text as string)
         if (newPostElement.current) {
             props.addPostCallback(newPostElement.current.value)
+            newPostElement.current.value = ' '
         }
+
     }
 
     return (

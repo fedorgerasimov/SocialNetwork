@@ -1,4 +1,5 @@
 import React from "react";
+import {rerenderEntireTree} from "../render";
 export type PostsType = {
     id: number
     message: string
@@ -71,4 +72,5 @@ export const addPost =(postMessage: string ) => {
         avatar: 'https://cdn4.iconfinder.com/data/icons/emojis-flat-pixel-perfect/64/emoji-64-512.png'
     }
     state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state)
 }
