@@ -21,6 +21,7 @@ type FriendsType = {
 }
 export type ProfilePageType = {
     posts : Array<PostsType>
+    messageForNewPost:string
 }
 export type DialogsPageType ={
     dialogs : Array<DialogsType>
@@ -37,6 +38,7 @@ export type StateType ={
 
 export const state : StateType = {
     profilePage : {
+        messageForNewPost: 'www',
         posts : [
             {id: 1, message:'Hi, what is favourite movie?', likesCount: 20, avatar: "https://cdn4.iconfinder.com/data/icons/smileys-for-fun/128/smiley__9-512.png"},
             {id: 2, message:'It\'s the best social network you have ever seen',likesCount: 15, avatar: "https://cdn4.iconfinder.com/data/icons/smileys-for-fun/128/smiley__12-512.png"},

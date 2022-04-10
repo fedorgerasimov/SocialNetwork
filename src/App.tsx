@@ -24,7 +24,8 @@ const App: React.FC<AppProps> = (props) => {
                     <Route path='/sidebar' render={() => <Sidebar stateData={props.stateData.sidebar}/>}/>
                     {/*<Route path='/dialogs' component={Dialogs}/>  Route exact path*/}
                     <Route path='/dialogs' render={() => <Dialogs stateData={props.stateData.dialogsPage}/>}/>
-                    <Route path='/profile' render={() => <Profile stateData={props.stateData.profilePage} addPostCallback={props.addPost}/>}/>  {/*posts={props.stateData.profilePage.posts}*/}
+                    <Route path='/profile' render={() => <Profile profilePage={props.stateData.profilePage}
+                                                                  addPostCallback={props.addPost}/>}/>  {/*posts={props.stateData.profilePage.posts}*/}
                     <Route path='/music' render={() => <Music/>}/>
                 </div>
             </div>

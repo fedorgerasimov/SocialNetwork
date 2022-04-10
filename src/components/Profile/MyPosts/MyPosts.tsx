@@ -7,6 +7,7 @@ import {PostsType, ProfilePageType} from "../../../redux/state";
 type MyPostsProps = {
     posts: Array<PostsType>
     addPostCallback: (postMessage: string )=> void
+    messageForNewPost:string
 }
 
 const MyPosts:React.FC<MyPostsProps> = (props) => {
@@ -27,15 +28,21 @@ const MyPosts:React.FC<MyPostsProps> = (props) => {
             props.addPostCallback(newPostElement.current.value)
             newPostElement.current.value = ' '
         }
-
     }
+    const onChangePostHandler= () => {
+        console.log('onChangePostHandler')
+    }
+
 
     return (
         <div className={s.postsBlock}>
             <h2>My posts</h2>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea ref={newPostElement}
+                                    onChange={onChangePostHandler}
+                                    value={props.messageForNewPost}
+                    />
                 </div>
                 <div>
                     <button onClick={addPostHandler}>Add post</button>
