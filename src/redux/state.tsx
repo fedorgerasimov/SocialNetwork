@@ -1,5 +1,6 @@
 import React from "react";
-import {rerenderEntireTree} from "../render";
+
+
 export type PostsType = {
     id: number
     message: string
@@ -65,6 +66,13 @@ export const state : StateType = {
     }
 }
 
+let rerenderEntireTree = () => { // это новая функция(модно назвать onChange), не из index.tsx
+    console.log('change')
+}
+
+export const subscribe =(callback: ()=> void) => {
+    rerenderEntireTree = callback
+}
 
 export const addPost =(postMessage: string ) => {
     const newPost: PostsType = {
@@ -74,10 +82,10 @@ export const addPost =(postMessage: string ) => {
         avatar: 'https://cdn4.iconfinder.com/data/icons/emojis-flat-pixel-perfect/64/emoji-64-512.png'
     }
     state.profilePage.posts.push(newPost)
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 
 export const updateNewPostText = (newText: string) => {
     state.profilePage.messageForNewPost = newText
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
