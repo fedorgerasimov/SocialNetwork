@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import Post from "./Posts/Post";
-import {PostsType, ProfilePageType, state, updateNewPostText} from "../../../redux/state";
+import {PostsType} from "../../../redux/state";
+import store from "../../../redux/state";
 
 
 type MyPostsProps = {
@@ -31,7 +32,7 @@ const MyPosts:React.FC<MyPostsProps> = (props) => {
         }*/
        /* props.addPostCallback(props.messageForNewPost)*/
         props.addPostCallback(props.messageForNewPost)
-        state.profilePage.messageForNewPost = ''
+        store._state.profilePage.messageForNewPost = ''
     }
 
     const onChangePostHandler= (event: ChangeEvent<HTMLTextAreaElement>) => {

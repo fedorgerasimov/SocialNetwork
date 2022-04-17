@@ -6,28 +6,29 @@ import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import Profile from "./components/Profile/Profile";
 import {Music} from "./components/Navbar/Music/Music";
-import {StateType, updateNewPostText} from "./redux/state";
+import store, {StateType, StoreType} from "./redux/state";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 
 type AppProps = {
-    stateData: StateType
-    addPost: (postMessage: string )=> void
-    updateNewPostText:(newText: string) => void
+    store: StoreType
+    //addPost: (postMessage: string )=> void
+    //updateNewPostText:(newText: string) => void
 }
 
 const App: React.FC<AppProps> = (props) => {
+    const stateData = props.store.getState()
     return (
         <BrowserRouter> {/*нужно всё обернуть <BrowserRouter>, по другому не работает*/}
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/sidebar' render={() => <Sidebar stateData={props.stateData.sidebar}/>}/>
+                    <Route path='/sidebar' render={() => <Sidebar stateData={stateData.sidebar}/>}/>
                     {/*<Route path='/dialogs' component={Dialogs}/>  Route exact path*/}
-                    <Route path='/dialogs' render={() => <Dialogs stateData={props.stateData.dialogsPage}/>}/>
-                    <Route path='/profile' render={() => <Profile profilePage={props.stateData.profilePage}
-                                                                  updateNewPostTextCallback={props.updateNewPostText}
-                                                                  addPostCallback={props.addPost}/>}/>  {/*posts={props.stateData.profilePage.posts}*/}
+                    <Route path='/dialogs' render={() => <Dialogs stateData={stateData.dialogsPage}/>}/>
+                    <Route path='/profile' render={() => <Profile profilePage={stateData.profilePage}
+                                                                  updateNewPostTextCallback={props.store.updateNewPostText.bind(props.store)}
+                                                                  addPostCallback={props.store.addPost.bind(props.store)}/>}/>  {/*posts={props.stateData.profilePage.posts}*/}
                     <Route path='/music' render={() => <Music/>}/>
                 </div>
             </div>
