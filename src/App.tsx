@@ -6,13 +6,14 @@ import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import Profile from "./components/Profile/Profile";
 import {Music} from "./components/Navbar/Music/Music";
-import store, {StateType, StoreType} from "./redux/state";
+import {ActionsTypes, StoreType} from "./redux/state";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 
 type AppProps = {
     store: StoreType
     //addPost: (postMessage: string )=> void
     //updateNewPostText:(newText: string) => void
+    //dispatch: (action: ActionsTypes)=> void
 }
 
 const App: React.FC<AppProps> = (props) => {
@@ -28,7 +29,9 @@ const App: React.FC<AppProps> = (props) => {
                     <Route path='/dialogs' render={() => <Dialogs stateData={stateData.dialogsPage}/>}/>
                     <Route path='/profile' render={() => <Profile profilePage={stateData.profilePage}
                                                                   updateNewPostTextCallback={props.store.updateNewPostText.bind(props.store)}
-                                                                  addPostCallback={props.store.addPost.bind(props.store)}/>}/>  {/*posts={props.stateData.profilePage.posts}*/}
+                                                                  dispatch={props.store.dispatch.bind(props.store)}
+                                                                    //addPostCallback={props.store.addPost.bind(props.store)}
+                                                                    />}/>
                     <Route path='/music' render={() => <Music/>}/>
                 </div>
             </div>
