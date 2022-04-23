@@ -44,26 +44,8 @@ export type StoreType = {
     _callSubscriber: (_state: StateType) => void
     subscribe: (callback: () => void) => void
     getState: () => StateType
-    dispatch: (action: AddPostAT | updateNewPostTextAT | updateNewMessageBodyAT | sendMessageAT) => void
+    dispatch: (action: ActionsTypes) => void
 }
-
-export type AddPostAT = {
-    type: 'ADD-POST'
-    postMessage: string
-}
-export type  updateNewPostTextAT = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
-type updateNewMessageBodyAT = {
-    type: 'UPDATE-NEW-MESSAGE-BODY'
-    body: string
-}
-type sendMessageAT = {
-    type: 'SEND-MESSAGE'
-}
-
-export type ActionsTypes = AddPostAT | updateNewPostTextAT | updateNewMessageBodyAT | sendMessageAT
 
 const store: StoreType = {
     _state: {
@@ -168,12 +150,32 @@ const store: StoreType = {
     }
 }
 
-export const addPostAC = (postMessage: string): AddPostAT => ({type: 'ADD-POST', postMessage} as const)
-export const updateNewPostTextAC = (newText: string): updateNewPostTextAT => ({
-    type: 'UPDATE-NEW-POST-TEXT',
-    newText} as const)
-export const updateNewMessageBodyAC = (body: string) : updateNewMessageBodyAT =>({type: 'UPDATE-NEW-MESSAGE-BODY', body})
-export const sendMessageAC = ():sendMessageAT=> ({type: 'SEND-MESSAGE'} as const)
+export type AddPostAT = {
+    type: 'ADD-POST'
+    postMessage: string
+}
+export type  updateNewPostTextAT = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+type updateNewMessageBodyAT = {
+    type: 'UPDATE-NEW-MESSAGE-BODY'
+    body: string
+}
+type sendMessageAT = {
+    type: 'SEND-MESSAGE'
+}
+
+export type ActionsTypes =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof updateNewMessageBodyAC>
+    | ReturnType<typeof sendMessageAC>
+
+export const addPostAC = (postMessage: string)=> ({type: 'ADD-POST', postMessage} as const)
+export const updateNewPostTextAC = (newText: string)=> ({type: 'UPDATE-NEW-POST-TEXT', newText} as const)
+export const updateNewMessageBodyAC = (body: string)=> ({type: 'UPDATE-NEW-MESSAGE-BODY', body} as const)
+export const sendMessageAC = ()=> ({type: 'SEND-MESSAGE'} as const)
 
 export default store
 
