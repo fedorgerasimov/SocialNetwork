@@ -1,35 +1,39 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import Post from "./Posts/Post";
-import {ActionsTypes,PostsType} from "../../../redux/state";
+import {ActionsTypes, PostsType, updateNewPostTextAT} from "../../../redux/state";
 import store from "../../../redux/state";
 
 
 type MyPostsProps = {
     posts: Array<PostsType>
-    messageForNewPost:string
+    messageForNewPost: string
     //addPostCallback: (postMessage: string )=> void
-    updateNewPostTextCallback: (newText: string) => void
-    dispatch: (action: ActionsTypes)=> void
+    //updateNewPostTextCallback: (newText: string) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
-const MyPosts:React.FC<MyPostsProps> = (props) => {
+const MyPosts: React.FC<MyPostsProps> = (props) => {
 
 
-    let postsElement = props.posts.map(el => <Post key={el.id} id={el.id} message={el.message} likesCount={el.likesCount} avatar={el.avatar}/>)
+    let postsElement = props.posts.map(el => <Post key={el.id} id={el.id} message={el.message}
+                                                   likesCount={el.likesCount} avatar={el.avatar}/>)
 
     //let newPostElement = React.createRef<HTMLTextAreaElement>()  // неявная типизация
 
     const addPostHandler = () => {
         //props.addPostCallback(props.messageForNewPost)
-        props.dispatch({type: "ADD-POST", postMessage: props.messageForNewPost})
+        props.dispatch({type: "ADD-POST", postMessage: props.messageForNewPost}
+        )
         store._state.profilePage.messageForNewPost = ''
     }
 
-    const onChangePostHandler= (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const onChangePostHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         console.log('onChangePostHandler')
-        props.updateNewPostTextCallback(event.currentTarget.value)
-        //props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: props.posts })
+        let text = event.currentTarget.value
+        let action:updateNewPostTextAT = {type: "UPDATE-NEW-POST-TEXT", newText: text}
+        props.dispatch(action)
+        // props.updateNewPostTextCallback(event.currentTarget.value)
     }
 
 
@@ -39,8 +43,8 @@ const MyPosts:React.FC<MyPostsProps> = (props) => {
             <div>
                 <div>
                     <textarea //ref={newPostElement}
-                                    onChange={onChangePostHandler}
-                                    value={props.messageForNewPost}
+                        onChange={onChangePostHandler}
+                        value={props.messageForNewPost}
                     />
                 </div>
                 <div>

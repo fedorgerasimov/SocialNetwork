@@ -38,7 +38,7 @@ export type StateType = {
 
 export type StoreType = {
     _state: StateType
-    updateNewPostText: (newText: string) => void
+    //updateNewPostText: (newText: string) => void
     //addPost: (postMessage: string) => void
     _callSubscriber: () => void
     subscribe: (callback: () => void) => void
@@ -50,7 +50,7 @@ type AddPostAT = {
     type: 'ADD-POST'
     postMessage: string
 }
-type  updateNewPostTextAT = {
+export type  updateNewPostTextAT = {
     type: 'UPDATE-NEW-POST-TEXT'
     newText: string
 }
@@ -121,10 +121,10 @@ const store: StoreType = {
         this._state.profilePage.posts.push(newPost)
         this._callSubscriber()
     },*/
-    updateNewPostText(newText: string) {
+/*    updateNewPostText(newText: string) { // не получается добавить через dispatch
         this._state.profilePage.messageForNewPost = newText
         this._callSubscriber()
-    },
+    },*/
 
     dispatch(action) {
         switch (action.type) {

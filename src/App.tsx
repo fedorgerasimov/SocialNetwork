@@ -28,7 +28,7 @@ const App: React.FC<AppProps> = (props) => {
                     {/*<Route path='/dialogs' component={Dialogs}/>  Route exact path*/}
                     <Route path='/dialogs' render={() => <Dialogs stateData={stateData.dialogsPage}/>}/>
                     <Route path='/profile' render={() => <Profile profilePage={stateData.profilePage}
-                                                                  updateNewPostTextCallback={props.store.updateNewPostText.bind(props.store)}
+                                                                  //updateNewPostTextCallback={props.store.updateNewPostText.bind(props.store)}
                                                                   dispatch={props.store.dispatch.bind(props.store)}
                                                                     //addPostCallback={props.store.addPost.bind(props.store)}
                                                                     />}/>

@@ -7,7 +7,7 @@ import {ActionsTypes, ProfilePageType} from "../../redux/state";
 type ProfileProps = {
     profilePage: ProfilePageType
     //addPostCallback: (postMessage: string )=> void
-    updateNewPostTextCallback:(newText: string) => void
+    //updateNewPostTextCallback:(newText: string) => void
     dispatch: (action: ActionsTypes)=> void
 }
 
@@ -20,7 +20,7 @@ function Profile(props: ProfileProps ) {
                      messageForNewPost={props.profilePage.messageForNewPost}
                      dispatch={props.dispatch}
                      //addPostCallback={props.addPostCallback}
-                     updateNewPostTextCallback={props.updateNewPostTextCallback}
+                     //updateNewPostTextCallback={props.updateNewPostTextCallback}
                     />
         </div>
     )
