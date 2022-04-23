@@ -46,7 +46,7 @@ export type StoreType = {
     dispatch: (action: AddPostAT| updateNewPostTextAT) => void
 }
 
-type AddPostAT = {
+export type AddPostAT = {
     type: 'ADD-POST'
     postMessage: string
 }
@@ -147,6 +147,10 @@ const store: StoreType = {
         }
     }
 }
+
+export const addPostAC = (postMessage: string): AddPostAT => ({type: 'ADD-POST', postMessage} as const)
+export const updateNewPostTextAC = (newText: string): updateNewPostTextAT => ({type: 'UPDATE-NEW-POST-TEXT', newText} as const)
+
 export default store
 
 /*export const state : StateType = {
