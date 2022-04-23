@@ -26,12 +26,14 @@ const App: React.FC<AppProps> = (props) => {
                 <div className='app-wrapper-content'>
                     <Route path='/sidebar' render={() => <Sidebar stateData={stateData.sidebar}/>}/>
                     {/*<Route path='/dialogs' component={Dialogs}/>  Route exact path*/}
-                    <Route path='/dialogs' render={() => <Dialogs stateData={stateData.dialogsPage}/>}/>
-                    <Route path='/profile' render={() => <Profile profilePage={stateData.profilePage}
-                                                                  //updateNewPostTextCallback={props.store.updateNewPostText.bind(props.store)}
+                    <Route path='/dialogs' render={() => <Dialogs stateData={stateData.dialogsPage}
                                                                   dispatch={props.store.dispatch.bind(props.store)}
-                                                                    //addPostCallback={props.store.addPost.bind(props.store)}
-                                                                    />}/>
+                    />}/>
+                    <Route path='/profile' render={() => <Profile profilePage={stateData.profilePage}
+                        //updateNewPostTextCallback={props.store.updateNewPostText.bind(props.store)}
+                                                                  dispatch={props.store.dispatch.bind(props.store)}
+                        //addPostCallback={props.store.addPost.bind(props.store)}
+                    />}/>
                     <Route path='/music' render={() => <Music/>}/>
                 </div>
             </div>

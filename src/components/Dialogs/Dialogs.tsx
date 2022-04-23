@@ -1,23 +1,30 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogsPageType} from "../../redux/state";
+import {ActionsTypes, DialogsPageType, sendMessageAC, updateNewMessageBodyAC} from "../../redux/state";
 
 type DialogsProps = {
     //dialogs: Array<DialogsType>
     //messages: Array<MessagesType>
     stateData : DialogsPageType
+    dispatch: (action: ActionsTypes) => void
 }
 
 export const Dialogs = (props: DialogsProps) => {
-    /* const dialogsElements1 =
-        [<DialogItem name={props.dialogs[0].name} id={props.dialogs[0].id}/>,
-            <DialogItem name={props.dialogs[1].name} id={props.messages[1].id}/>] //переписал на метод map*/
+
 
     const dialogsElements = props.stateData.dialogs.map(el => <DialogItem key={el.id}  id={el.id} name={el.name}/>)
-
     const messagesElements = props.stateData.messages.map(el => <Message message={el.message}/>)
+    const newMessageBody = props.stateData.newMessageBody
+
+    const onSendMessageClick = () => {
+        props.dispatch(sendMessageAC())
+    }
+
+    const onNewMessageChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch(updateNewMessageBodyAC(event.currentTarget.value))
+    }
 
     return (
         <div className={s.dialogs}>
@@ -39,7 +46,14 @@ export const Dialogs = (props: DialogsProps) => {
                 </div>*/}
             </div>
             <div className={s.messages}>
-                {messagesElements}
+                <div>{messagesElements}</div>
+                <div>
+                    <div><textarea
+                        value={newMessageBody}
+                        onChange={onNewMessageChange}
+                        placeholder='Enter your message'/></div>
+                    <div> <button onClick={onSendMessageClick}>Send</button></div>
+                </div>
                 {/*<Message message={messagesData[0].message}/>
                 <Message message={messagesData[1].message}/>*/}
                 {/*<div className={s.message}>What's up?</div>

@@ -26,6 +26,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
+    newMessageBody: string
 }
 export type SidebarPageType = {
     friendsPage: Array<FriendsType>
@@ -40,10 +41,10 @@ export type StoreType = {
     _state: StateType
     //updateNewPostText: (newText: string) => void
     //addPost: (postMessage: string) => void
-    _callSubscriber: () => void
+    _callSubscriber: (_state: StateType) => void
     subscribe: (callback: () => void) => void
     getState: () => StateType
-    dispatch: (action: AddPostAT| updateNewPostTextAT) => void
+    dispatch: (action: AddPostAT | updateNewPostTextAT | updateNewMessageBodyAT | sendMessageAT) => void
 }
 
 export type AddPostAT = {
@@ -54,7 +55,15 @@ export type  updateNewPostTextAT = {
     type: 'UPDATE-NEW-POST-TEXT'
     newText: string
 }
-export type ActionsTypes = AddPostAT| updateNewPostTextAT
+type updateNewMessageBodyAT = {
+    type: 'UPDATE-NEW-MESSAGE-BODY'
+    body: string
+}
+type sendMessageAT = {
+    type: 'SEND-MESSAGE'
+}
+
+export type ActionsTypes = AddPostAT | updateNewPostTextAT | updateNewMessageBodyAT | sendMessageAT
 
 const store: StoreType = {
     _state: {
@@ -90,7 +99,8 @@ const store: StoreType = {
             messages: [
                 {id: 1, message: 'What\'s up?'},
                 {id: 2, message: 'What is your hobby?'},
-                {id: 3, message: 'Hello'}]
+                {id: 3, message: 'Hello'}],
+            newMessageBody: ""
         },
         sidebar: {
             friendsPage: [
@@ -111,20 +121,20 @@ const store: StoreType = {
         this._callSubscriber = callback
     },
 
-/*    addPost(postMessage: string) {
-        const newPost: PostsType = {
-            id: new Date().getTime(),
-            message: postMessage,
-            likesCount: 5,
-            avatar: 'https://cdn4.iconfinder.com/data/icons/emojis-flat-pixel-perfect/64/emoji-64-512.png'
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._callSubscriber()
-    },*/
-/*    updateNewPostText(newText: string) { // не получается добавить через dispatch
-        this._state.profilePage.messageForNewPost = newText
-        this._callSubscriber()
-    },*/
+    /*    addPost(postMessage: string) {
+            const newPost: PostsType = {
+                id: new Date().getTime(),
+                message: postMessage,
+                likesCount: 5,
+                avatar: 'https://cdn4.iconfinder.com/data/icons/emojis-flat-pixel-perfect/64/emoji-64-512.png'
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._callSubscriber()
+        },*/
+    /*    updateNewPostText(newText: string) { // не получается добавить через dispatch
+            this._state.profilePage.messageForNewPost = newText
+            this._callSubscriber()
+        },*/
 
     dispatch(action) {
         switch (action.type) {
@@ -136,12 +146,22 @@ const store: StoreType = {
                     avatar: 'https://cdn4.iconfinder.com/data/icons/emojis-flat-pixel-perfect/64/emoji-64-512.png'
                 }
                 this._state.profilePage.posts.push(newPost)
-                this._callSubscriber();
-            break;
+                this._callSubscriber(this._state);
+                break;
             case 'UPDATE-NEW-POST-TEXT':
                 this._state.profilePage.messageForNewPost = action.newText
-                this._callSubscriber();
-            break;
+                this._callSubscriber(this._state);
+                break;
+            case 'UPDATE-NEW-MESSAGE-BODY':
+                this._state.dialogsPage.newMessageBody = action.body
+                this._callSubscriber(this._state);
+                break;
+            case 'SEND-MESSAGE':
+                let body = this._state.dialogsPage.newMessageBody
+                this._state.dialogsPage.newMessageBody = ''
+                this._state.dialogsPage.messages.push({id: 7, message: body})
+                this._callSubscriber(this._state)
+                break
             default:
                 break;
         }
@@ -149,7 +169,11 @@ const store: StoreType = {
 }
 
 export const addPostAC = (postMessage: string): AddPostAT => ({type: 'ADD-POST', postMessage} as const)
-export const updateNewPostTextAC = (newText: string): updateNewPostTextAT => ({type: 'UPDATE-NEW-POST-TEXT', newText} as const)
+export const updateNewPostTextAC = (newText: string): updateNewPostTextAT => ({
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText} as const)
+export const updateNewMessageBodyAC = (body: string) : updateNewMessageBodyAT =>({type: 'UPDATE-NEW-MESSAGE-BODY', body})
+export const sendMessageAC = ():sendMessageAT=> ({type: 'SEND-MESSAGE'} as const)
 
 export default store
 
