@@ -6,7 +6,7 @@ import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import Profile from "./components/Profile/Profile";
 import {Music} from "./components/Navbar/Music/Music";
-import {ActionsTypes, StoreType} from "./redux/state";
+import { StoreType} from "./redux/state";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 
 type AppProps = {

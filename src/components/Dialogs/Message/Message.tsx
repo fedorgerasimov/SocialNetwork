@@ -7,11 +7,6 @@ type MessageProps = {
 
 export const Message = (props: MessageProps) => {
 
-    const newMessage = React.createRef<HTMLTextAreaElement>()
-
-    const addMessage = () => {
-        alert (newMessage.current?.value)
-    }
     return <div>
         <div className={s.message}>{props.message}</div>
 

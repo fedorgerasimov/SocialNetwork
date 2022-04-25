@@ -3,13 +3,10 @@ import s from './MyPosts.module.css'
 import Post from "./Posts/Post";
 import {
     ActionsTypes,
-    addPostAC,
-    AddPostAT,
     PostsType,
-    updateNewPostTextAC,
-    updateNewPostTextAT
 } from "../../../redux/state";
 import store from "../../../redux/state";
+import {addPostAC, updateNewPostTextAC} from "../../../redux/profile-reducer";
 
 
 type MyPostsProps = {
@@ -25,7 +22,6 @@ const MyPosts: React.FC<MyPostsProps> = (props) => {
     let postsElement = props.posts.map(el => <Post key={el.id} id={el.id} message={el.message}
                                                    likesCount={el.likesCount} avatar={el.avatar}/>)
 
-    //let newPostElement = React.createRef<HTMLTextAreaElement>()  // неявная типизация
 
     const addPostHandler = () => {
         //props.addPostCallback(props.messageForNewPost)
@@ -64,9 +60,6 @@ const MyPosts: React.FC<MyPostsProps> = (props) => {
             </div>
             <div className={s.posts}>
                 {postsElement}
-                {/*<Post message={postsData[0].message} likesCount={postsData[0].likesCount}/>
-                <Post message={postsData[1].message} likesCount={postsData[1].likesCount}/>*/}
-
             </div>
         </div>
     )

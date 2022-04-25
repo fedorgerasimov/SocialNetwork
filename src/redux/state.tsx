@@ -1,4 +1,6 @@
 import React from "react";
+import {ActionsProfileTypes, profileReducer} from "./profile-reducer";
+import {ActionsDialogsTypes, dialogsReducer} from "./dialogs-reducer";
 
 export type PostsType = {
     id: number
@@ -39,8 +41,6 @@ export type StateType = {
 
 export type StoreType = {
     _state: StateType
-    //updateNewPostText: (newText: string) => void
-    //addPost: (postMessage: string) => void
     _callSubscriber: (_state: StateType) => void
     subscribe: (callback: () => void) => void
     getState: () => StateType
@@ -103,81 +103,21 @@ const store: StoreType = {
         this._callSubscriber = callback
     },
 
-    /*    addPost(postMessage: string) {
-            const newPost: PostsType = {
-                id: new Date().getTime(),
-                message: postMessage,
-                likesCount: 5,
-                avatar: 'https://cdn4.iconfinder.com/data/icons/emojis-flat-pixel-perfect/64/emoji-64-512.png'
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._callSubscriber()
-        },*/
-    /*    updateNewPostText(newText: string) { // не получается добавить через dispatch
-            this._state.profilePage.messageForNewPost = newText
-            this._callSubscriber()
-        },*/
-
     dispatch(action) {
-        switch (action.type) {
-            case 'ADD-POST':
-                const newPost: PostsType = {
-                    id: new Date().getTime(),
-                    message: action.postMessage,
-                    likesCount: 5,
-                    avatar: 'https://cdn4.iconfinder.com/data/icons/emojis-flat-pixel-perfect/64/emoji-64-512.png'
-                }
-                this._state.profilePage.posts.push(newPost)
-                this._callSubscriber(this._state);
-                break;
-            case 'UPDATE-NEW-POST-TEXT':
-                this._state.profilePage.messageForNewPost = action.newText
-                this._callSubscriber(this._state);
-                break;
-            case 'UPDATE-NEW-MESSAGE-BODY':
-                this._state.dialogsPage.newMessageBody = action.body
-                this._callSubscriber(this._state);
-                break;
-            case 'SEND-MESSAGE':
-                let body = this._state.dialogsPage.newMessageBody
-                this._state.dialogsPage.newMessageBody = ''
-                this._state.dialogsPage.messages.push({id: 7, message: body})
-                this._callSubscriber(this._state)
-                break
-            default:
-                break;
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._callSubscriber(this._state)
     }
 }
 
-export type AddPostAT = {
-    type: 'ADD-POST'
-    postMessage: string
-}
-export type  updateNewPostTextAT = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
-type updateNewMessageBodyAT = {
-    type: 'UPDATE-NEW-MESSAGE-BODY'
-    body: string
-}
-type sendMessageAT = {
-    type: 'SEND-MESSAGE'
-}
-
 export type ActionsTypes =
-    ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateNewPostTextAC>
-    | ReturnType<typeof updateNewMessageBodyAC>
-    | ReturnType<typeof sendMessageAC>
-
-export const addPostAC = (postMessage: string)=> ({type: 'ADD-POST', postMessage} as const)
-export const updateNewPostTextAC = (newText: string)=> ({type: 'UPDATE-NEW-POST-TEXT', newText} as const)
-export const updateNewMessageBodyAC = (body: string)=> ({type: 'UPDATE-NEW-MESSAGE-BODY', body} as const)
-export const sendMessageAC = ()=> ({type: 'SEND-MESSAGE'} as const)
+    ActionsProfileTypes| ActionsDialogsTypes
 
 export default store
+
+
+
+
 
 /*export const state : StateType = {
     profilePage : {
