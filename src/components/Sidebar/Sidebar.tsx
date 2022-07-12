@@ -1,5 +1,5 @@
 import React from "react";
-import {SidebarPageType} from "../../redux/state";
+import {SidebarPageType} from "../../redux/store";
 import {SidebarItem} from "./SidebarItem";
 
 type SidebarProps = {

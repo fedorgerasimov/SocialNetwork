@@ -108,6 +108,7 @@ const store: StoreType = {
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._callSubscriber(this._state)
     }
+
 }
 
 export type ActionsTypes =

@@ -6,11 +6,12 @@ import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import Profile from "./components/Profile/Profile";
 import {Music} from "./components/Navbar/Music/Music";
-import { StoreType} from "./redux/state";
+import { StoreType} from "./redux/store";
 import {Sidebar} from "./components/Sidebar/Sidebar";
+import {ReduxStoreType} from "./redux/redux-store";
 
 type AppProps = {
-    store: StoreType
+    store: ReduxStoreType
     //addPost: (postMessage: string )=> void
     //updateNewPostText:(newText: string) => void
     //dispatch: (action: ActionsTypes)=> void
@@ -24,7 +25,7 @@ const App: React.FC<AppProps> = (props) => {
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/sidebar' render={() => <Sidebar stateData={stateData.sidebar}/>}/>
+                 {/*   <Route path='/sidebar' render={() => <Sidebar stateData={stateData.sidebar}/>}/>*/}
                     {/*<Route path='/dialogs' component={Dialogs}/>  Route exact path*/}
                     <Route path='/dialogs' render={() => <Dialogs stateData={stateData.dialogsPage}
                                                                   dispatch={props.store.dispatch.bind(props.store)}
