@@ -4,46 +4,31 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {ActionsTypes, DialogsPageType} from "../../redux/store";
 import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
+import {ReduxStoreType} from "../../redux/redux-store";
 
 type DialogsProps = {
-    //dialogs: Array<DialogsType>
-    //messages: Array<MessagesType>
-    stateData : DialogsPageType
-    dispatch: (action: ActionsTypes) => void
+    store: ReduxStoreType
+    updateNewMessageBody: (event: string) => void
+    sendMessage: () => void
 }
 
 export const Dialogs = (props: DialogsProps) => {
 
-    const dialogsElements = props.stateData.dialogs.map(el => <DialogItem key={el.id}  id={el.id} name={el.name}/>)
-    const messagesElements = props.stateData.messages.map(el => <Message key={el.id}  message={el.message}/>)
-    const newMessageBody = props.stateData.newMessageBody
+    const state = props.store.getState().dialogsPage
+    const dialogsElements = state.dialogs.map(el => <DialogItem key={el.id} id={el.id} name={el.name}/>)
+    const messagesElements = state.messages.map(el => <Message key={el.id} message={el.message}/>)
+    const newMessageBody = state.newMessageBody
 
-    const onSendMessageClick = () => {
-        props.dispatch(sendMessageAC())
-    }
+    const onSendMessageClick = () => props.sendMessage()
 
     const onNewMessageChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewMessageBodyAC(event.currentTarget.value))
+        props.updateNewMessageBody(event.currentTarget.value)
     }
 
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
                 {dialogsElements}
-                {/*  <DialogItem name={dialogsData[0].name} id={dialogsData[0].id}/>
-                <DialogItem name={dialogsData[1].name} id={dialogsData[1].id}/>*/}
-                {/*             <div className={`${s.dialog} ${s.active}`}>
-                    <NavLink to='/dialogs/1'>Jameson</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/dialogs/2'>Bob</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/dialogs/3'>Jane</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/dialogs/4'>Arnold</NavLink>
-                </div>*/}
             </div>
             <div className={s.messages}>
                 <div>{messagesElements}</div>
@@ -52,13 +37,10 @@ export const Dialogs = (props: DialogsProps) => {
                         value={newMessageBody}
                         onChange={onNewMessageChange}
                         placeholder='Enter your message'/></div>
-                    <div> <button onClick={onSendMessageClick}>Send</button></div>
+                    <div>
+                        <button onClick={onSendMessageClick}>Send</button>
+                    </div>
                 </div>
-                {/*<Message message={messagesData[0].message}/>
-                <Message message={messagesData[1].message}/>*/}
-                {/*<div className={s.message}>What's up?</div>
-                <div className={s.message}>What is your hobby?</div>
-                <div className={s.message}>Hello</div>*/}
             </div>
         </div>
     )

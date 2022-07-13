@@ -8,7 +8,8 @@ import Profile from "./components/Profile/Profile";
 import {Music} from "./components/Navbar/Music/Music";
 import { StoreType} from "./redux/store";
 import {Sidebar} from "./components/Sidebar/Sidebar";
-import {ReduxStoreType} from "./redux/redux-store";
+import {ReduxStoreType, store} from "./redux/redux-store";
+import {DialogsContainer} from "./components/Dialogs/Message/DialogsContainer";
 
 type AppProps = {
     store: ReduxStoreType
@@ -25,15 +26,9 @@ const App: React.FC<AppProps> = (props) => {
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                 {/*   <Route path='/sidebar' render={() => <Sidebar stateData={stateData.sidebar}/>}/>*/}
-                    {/*<Route path='/dialogs' component={Dialogs}/>  Route exact path*/}
-                    <Route path='/dialogs' render={() => <Dialogs stateData={stateData.dialogsPage}
-                                                                  dispatch={props.store.dispatch.bind(props.store)}
-                    />}/>
-                    <Route path='/profile' render={() => <Profile profilePage={stateData.profilePage}
-                        //updateNewPostTextCallback={props.store.updateNewPostText.bind(props.store)}
-                                                                  dispatch={props.store.dispatch.bind(props.store)}
-                        //addPostCallback={props.store.addPost.bind(props.store)}
+                   {/* <Route path='/sidebar' render={() => <Sidebar stateData={stateData.sidebar}/>}/>*/}
+                    <Route path='/dialogs' render={() => <DialogsContainer store={props.store}/>}/>
+                    <Route path='/profile' render={() => <Profile store={props.store}
                     />}/>
                     <Route path='/music' render={() => <Music/>}/>
                 </div>

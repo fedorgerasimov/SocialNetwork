@@ -6,8 +6,8 @@ const rootReducer = combineReducers({
     profilePage:profileReducer,
     dialogsPage:dialogsReducer
 });
-
-//export type AppStateType = ReturnType<typeof rootReducer>
-export type ReduxStoreType = typeof store
 export const store = createStore(rootReducer);
+
+export type ReduxStoreType = typeof store
+//export type AppRootStateType = ReturnType<typeof rootReducer>
 
