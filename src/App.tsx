@@ -12,14 +12,14 @@ import {ReduxStoreType, store} from "./redux/redux-store";
 import {DialogsContainer} from "./components/Dialogs/Message/DialogsContainer";
 
 type AppProps = {
-    store: ReduxStoreType
+    //store: ReduxStoreType
     //addPost: (postMessage: string )=> void
     //updateNewPostText:(newText: string) => void
     //dispatch: (action: ActionsTypes)=> void
 }
 
 const App: React.FC<AppProps> = (props) => {
-    const stateData = props.store.getState()
+    //const stateData = props.store.getState()
     return (
         <BrowserRouter> {/*нужно всё обернуть <BrowserRouter>, по другому не работает*/}
             <div className="app-wrapper">
@@ -27,8 +27,8 @@ const App: React.FC<AppProps> = (props) => {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                    {/* <Route path='/sidebar' render={() => <Sidebar stateData={stateData.sidebar}/>}/>*/}
-                    <Route path='/dialogs' render={() => <DialogsContainer store={props.store}/>}/>
-                    <Route path='/profile' render={() => <Profile store={props.store}
+                    <Route path='/dialogs' render={() => <DialogsContainer /*store={props.store}*//>}/>
+                    <Route path='/profile' render={() => <Profile /*store={props.store}*/
                     />}/>
                     <Route path='/music' render={() => <Music/>}/>
                 </div>

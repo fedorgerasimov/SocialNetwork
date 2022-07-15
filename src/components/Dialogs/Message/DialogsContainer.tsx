@@ -3,24 +3,32 @@ import {Dialogs} from "../Dialogs";
 import {ActionsTypes, DialogsPageType} from "../../../redux/store";
 import {sendMessageAC, updateNewMessageBodyAC} from "../../../redux/dialogs-reducer";
 import {ReduxStoreType} from "../../../redux/redux-store";
+import {StoreContext} from "../../../StoreContext";
 
 type DialogsProps = {
-    store: ReduxStoreType
+    //store: ReduxStoreType
 }
 
 export const DialogsContainer = (props: DialogsProps) => {
 
-    const onSendMessageClick = () => {
-        props.store.dispatch(sendMessageAC())
-    }
+    return (
+        <StoreContext.Consumer>
+            {
+                (store) => {
+                    const onSendMessageClick = () => {
+                        store.dispatch(sendMessageAC())
+                    }
 
-    const onNewMessageChange = (body: string) => {
-        props.store.dispatch(updateNewMessageBodyAC(body))
-    }
+                    const onNewMessageChange = (body: string) => {
+                        store.dispatch(updateNewMessageBodyAC(body))
+                    }
 
-    return <Dialogs updateNewMessageBody={onNewMessageChange}
-                    sendMessage={onSendMessageClick}
-                    store={props.store}
-    />
-
+                    return <Dialogs updateNewMessageBody={onNewMessageChange}
+                                    sendMessage={onSendMessageClick}
+                                    store={store}
+                    />
+                }
+            }
+        </StoreContext.Consumer>
+    )
 }

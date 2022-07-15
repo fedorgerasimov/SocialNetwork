@@ -4,7 +4,7 @@ import {MyPostsContainer} from "./MyPosts/Posts/MyPostsContainer";
 import {ReduxStoreType} from "../../redux/redux-store";
 
 type ProfileProps = {
-    store: ReduxStoreType
+    //store: ReduxStoreType
 }
 
 function Profile(props: ProfileProps ) {
@@ -12,7 +12,7 @@ function Profile(props: ProfileProps ) {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer store={props.store}
+            <MyPostsContainer //store={props.store}
                     />
         </div>
     )
