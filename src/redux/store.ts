@@ -8,11 +8,11 @@ export type PostsType = {
     likesCount: number
     avatar: string
 }
-export type DialogsType = {
+type DialogsType = {
     id: number
     name: string
 }
-export type MessagesType = {
+type MessagesType = {
     id: number
     message: string
 }

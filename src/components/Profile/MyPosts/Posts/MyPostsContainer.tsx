@@ -1,14 +1,34 @@
 import React from 'react';
 import MyPosts from "../MyPosts";
 import {addPostAC, updateNewPostTextAC} from "../../../../redux/profile-reducer";
-
-import {StoreContext} from "../../../../StoreContext";
+import {connect} from "react-redux";
+import {AppRootStateType} from "../../../../redux/redux-store";
 
 type MyPostsProps = {
-    //store: ReduxStoreType
 }
 
-export const MyPostsContainer = (props: MyPostsProps) => {
+let mapStateToProps = (state: AppRootStateType) => {
+    return {
+        posts: state.profilePage.posts,
+        messageForNewPost: state.profilePage.messageForNewPost
+
+    }
+}
+
+let mapDispatchToProps = (dispatch: any) => {
+    return {
+        updateNewPostTextCallback: (text: string) => {
+            dispatch(updateNewPostTextAC(text))
+        },
+        addPostCallback: () => {
+            dispatch(addPostAC())
+        }
+    }
+}
+
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+
+/*export const MyPostsContainer = (props: MyPostsProps) => {
 
     return (
         <StoreContext.Consumer>
@@ -34,4 +54,4 @@ export const MyPostsContainer = (props: MyPostsProps) => {
             }
         </StoreContext.Consumer>
     )
-};
+};*/

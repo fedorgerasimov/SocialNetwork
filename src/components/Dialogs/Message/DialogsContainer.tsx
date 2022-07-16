@@ -1,20 +1,34 @@
 import React from "react";
 import {Dialogs} from "../Dialogs";
-import {ActionsTypes, DialogsPageType} from "../../../redux/store";
 import {sendMessageAC, updateNewMessageBodyAC} from "../../../redux/dialogs-reducer";
-import {ReduxStoreType} from "../../../redux/redux-store";
-import {StoreContext} from "../../../StoreContext";
+import {connect} from "react-redux";
+import {AppRootStateType} from "../../../redux/redux-store";
 
-type DialogsProps = {
-    //store: ReduxStoreType
+
+let mapStateToProps = (state: AppRootStateType) => {
+    return{
+        dialogsPage: state.dialogsPage
+    }
+}
+let mapDispatchToProps = (dispatch: any) => {
+    return{
+        updateNewMessageBody: (body: any) => {
+            dispatch(updateNewMessageBodyAC(body))
+        },
+        sendMessage: () => {
+             dispatch(sendMessageAC())
+        }
+    }
 }
 
-export const DialogsContainer = (props: DialogsProps) => {
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+
+/*export const DialogsContainer = (props: DialogsProps) => {
 
     return (
         <StoreContext.Consumer>
             {
-                (store) => {
+                (store: any) => {
                     const onSendMessageClick = () => {
                         store.dispatch(sendMessageAC())
                     }
@@ -31,4 +45,4 @@ export const DialogsContainer = (props: DialogsProps) => {
             }
         </StoreContext.Consumer>
     )
-}
+}*/
