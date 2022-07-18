@@ -1,5 +1,9 @@
-import {ActionsTypes, PostsType, ProfilePageType} from "./store";
-
+export type PostsType = {
+    id: number
+    message: string
+    likesCount: number
+    avatar: string
+}
 
 let initialState = {
     messageForNewPost: '',
@@ -22,28 +26,31 @@ let initialState = {
             likesCount: 10,
             avatar: "https://cdn4.iconfinder.com/data/icons/smileys-for-fun/128/smiley__21-512.png"
         }
-    ],
+    ] as Array<PostsType>,
 }
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
+export type InitialStateType = typeof initialState
+
+export const profileReducer = (state: InitialStateType = initialState, action: ActionsProfileTypes): InitialStateType => {
     switch (action.type) {
         case 'ADD-POST': {
-            const newPost: PostsType = {
-                id: new Date().getTime(),
+            let newPost = {
+                id: 5,
                 message: state.messageForNewPost,
                 likesCount: 5,
                 avatar: 'https://cdn4.iconfinder.com/data/icons/emojis-flat-pixel-perfect/64/emoji-64-512.png'
             }
-            let stateCopy = {...state}
-            stateCopy.posts = [...state.posts]
-            stateCopy.posts.push(newPost)
-            stateCopy.messageForNewPost = ''
-            return stateCopy
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                messageForNewPost: ''
+            }
         }
         case 'UPDATE-NEW-POST-TEXT': {
-            let stateCopy = {...state}
-            stateCopy.messageForNewPost = action.newText
-            return stateCopy
+            return {
+                ...state,
+                messageForNewPost: action.newText
+            }
         }
         default:
             return state;
