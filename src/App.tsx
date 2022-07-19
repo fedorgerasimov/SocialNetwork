@@ -2,14 +2,11 @@ import React from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import Profile from "./components/Profile/Profile";
 import {Music} from "./components/Navbar/Music/Music";
-import { StoreType} from "./redux/store";
-import {Sidebar} from "./components/Sidebar/Sidebar";
-import {ReduxStoreType, store} from "./redux/redux-store";
 import {DialogsContainer} from "./components/Dialogs/Message/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 type AppProps = {
     //store: ReduxStoreType
@@ -31,6 +28,7 @@ const App: React.FC<AppProps> = (props) => {
                     <Route path='/profile' render={() => <Profile /*store={props.store}*/
                     />}/>
                     <Route path='/music' render={() => <Music/>}/>
+                    <Route path='/users' render={() => <UsersContainer/>}/>
                 </div>
             </div>
         </BrowserRouter>
