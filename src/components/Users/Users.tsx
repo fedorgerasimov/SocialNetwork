@@ -33,7 +33,6 @@ export const Users = (props: UsersPropsType) => {
                 status: 'Pre-Junior',
                 location: {city: 'Tallinn', country: 'Latvia'}
             },
-         //as Array<UserType>,
     ])
 
     }

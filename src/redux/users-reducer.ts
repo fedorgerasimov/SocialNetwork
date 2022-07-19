@@ -1,23 +1,15 @@
-
 export type UserType = {
     id: number
     followed: boolean
     fullName: string
     status: string
-    location: LocationType
+    location: { city: string, country: string }
     photoUrl: string
-
 }
-export type LocationType = {
-    city: string
-    country: string
-}
-
 export type InitialStateType = {
     users: Array<UserType>
 }
-
-const initialState : InitialStateType = {
+const initialState: InitialStateType = {
     users: []
 }
 

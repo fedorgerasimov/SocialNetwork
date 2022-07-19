@@ -9,10 +9,7 @@ import {DialogsContainer} from "./components/Dialogs/Message/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 
 type AppProps = {
-    //store: ReduxStoreType
-    //addPost: (postMessage: string )=> void
-    //updateNewPostText:(newText: string) => void
-    //dispatch: (action: ActionsTypes)=> void
+
 }
 
 const App: React.FC<AppProps> = (props) => {

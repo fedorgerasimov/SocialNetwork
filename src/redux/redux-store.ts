@@ -6,7 +6,7 @@ import {usersReducer} from "./users-reducer";
 export const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
-    users: usersReducer,
+    usersPage: usersReducer,
 
 });
 
@@ -14,7 +14,6 @@ export type AppRootStateType = ReturnType<typeof rootReducer>
 
 export const store = createStore(rootReducer);
 
-//export type ReduxStoreType = typeof store
 
 
 
