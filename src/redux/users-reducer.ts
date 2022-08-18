@@ -1,10 +1,10 @@
 export type UserType = {
     id: number
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: { city: string, country: string }
-    photoUrl: string
+    photos: string
 }
 export type InitialStateType = {
     users: Array<UserType>

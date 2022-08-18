@@ -15,15 +15,15 @@ beforeEach(() => {
         users:
             [
                 {
-                    id: 1, followed: false, fullName: 'Jameson', status: 'Junior', location:
+                    id: 1, followed: false, name: 'Jameson', status: 'Junior', location:
                         {city: 'Wroclaw', country: 'Poland'}
                 },
                 {
-                    id: 2, followed: true, fullName: 'Bob', status: 'Middle', location:
+                    id: 2, followed: true, name: 'Bob', status: 'Middle', location:
                         {city: 'Brest', country: 'Belarus'}
                 },
                 {
-                    id: 3, followed: true, fullName: 'Anna', status: 'Pre-Junior', location:
+                    id: 3, followed: true, name: 'Anna', status: 'Pre-Junior', location:
                         {city: 'Tallinn', country: 'Latvia'}
                 },
             ] as Array<UserType>,

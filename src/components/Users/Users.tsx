@@ -1,40 +1,16 @@
 import React from 'react';
 import styles from './users.module.css'
 import {UsersPropsType} from "./UsersContainer";
+import axios from "axios";
 
 
 export const Users = (props: UsersPropsType) => {
 
-    if (props.usersPage.users.length === 0)
-    {
-            props.setUsers ([
-
-            {
-                id: 1,
-                photoUrl: 'https://cdn1.iconfinder.com/data/icons/halloween-2176/60/004_-_Ghost_Smile-512.png',
-                followed: false,
-                fullName: 'Jameson',
-                status: 'Junior',
-                location: {city: 'Wroclaw', country: 'Poland'}
-            },
-            {
-                id: 2,
-                photoUrl: 'https://cdn1.iconfinder.com/data/icons/halloween-2174/60/039_-_Ghost_Happy-512.png',
-                followed: true,
-                fullName: 'Bob',
-                status: 'Middle',
-                location: {city: 'Brest', country: 'Belarus'}
-            },
-            {
-                id: 3,
-                photoUrl: 'https://cdn1.iconfinder.com/data/icons/halloween-2175/58/098_-_Cute_Ghost-512.png',
-                followed: true,
-                fullName: 'Anna',
-                status: 'Pre-Junior',
-                location: {city: 'Tallinn', country: 'Latvia'}
-            },
-    ])
-
+    if (props.usersPage.users.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+                debugger
+                props.setUsers (response.data.items)
+            })
     }
 
     return (
@@ -43,7 +19,8 @@ export const Users = (props: UsersPropsType) => {
                 props.usersPage.users.map(el => <div key={el.id}>
                     <span>
                         <div>
-                            <img src={el.photoUrl} alt="" className={styles.userPhoto}/>
+
+                            <img src={el.photos.small != null ? el.photos.small : require('../assets/img/ava.jpg') } alt="" className={styles.userPhoto}/>
                         </div>
                         <div>
                             {el.followed
@@ -54,12 +31,12 @@ export const Users = (props: UsersPropsType) => {
                     </span>
                     <span>
                         <span>
-                            <div>{el.fullName}</div>
+                            <div>{el.name}</div>
                             <div>{el.status}</div>
                         </span>
                         <span>
-                            <div>{el.location.country}</div>
-                            <div>{el.location.city}</div>
+                            <div>{"el.location.country"}</div>
+                            <div>{"el.location.city"}</div>
                         </span>
                     </span>
                 </div>)
