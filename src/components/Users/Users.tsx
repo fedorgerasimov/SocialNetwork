@@ -3,22 +3,23 @@ import styles from './users.module.css'
 import {UsersPropsType} from "./UsersContainer";
 import axios from "axios";
 
+class Users extends React.Component<UsersPropsType> {
 
-export const Users = (props: UsersPropsType) => {
-    let getUsers = () => {
-        if (props.usersPage.users.length === 0) {
+     getUsers = () => {
+        if (this.props.usersPage.users.length === 0) {
             axios.get("https://social-network.samuraijs.com/api/1.0/users")
                 .then(response => {
-                    props.setUsers(response.data.items)
+                    this.props.setUsers(response.data.items)
                 })
         }
     }
 
-    return (
-        <div>
-             <button onClick={getUsers}>Get Users</button>
-            {
-                props.usersPage.users.map(el => <div key={el.id}>
+    render() {
+        return (
+            <div>
+                <button onClick={this.getUsers}>Get Users</button>
+                {
+                    this.props.usersPage.users.map(el => <div key={el.id}>
                     <span>
                         <div>
 
@@ -28,15 +29,15 @@ export const Users = (props: UsersPropsType) => {
                         <div>
                             {el.followed
                                 ? <button onClick={() => {
-                                    props.unFollow(el.id)
+                                    this.props.unFollow(el.id)
                                 }}>Unfollow</button>
                                 : <button onClick={() => {
-                                    props.follow(el.id)
+                                    this.props.follow(el.id)
                                 }}>Follow</button>
                             }
                         </div>
                     </span>
-                    <span>
+                        <span>
                         <span>
                             <div>{el.name}</div>
                             <div>{el.status}</div>
@@ -46,10 +47,11 @@ export const Users = (props: UsersPropsType) => {
                             <div>{"el.location.city"}</div>
                         </span>
                     </span>
-                </div>)
-            }
-        </div>
-    );
-};
+                    </div>)
+                }
+            </div>
+        );
+    }
+}
 
-export default Users;
+export default Users
