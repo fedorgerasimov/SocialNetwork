@@ -7,6 +7,7 @@ import Profile from "./components/Profile/Profile";
 import {Music} from "./components/Navbar/Music/Music";
 import {DialogsContainer} from "./components/Dialogs/Message/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 type AppProps = {
 
@@ -22,7 +23,7 @@ const App: React.FC<AppProps> = (props) => {
                 <div className='app-wrapper-content'>
                    {/* <Route path='/sidebar' render={() => <Sidebar stateData={stateData.sidebar}/>}/>*/}
                     <Route path='/dialogs' render={() => <DialogsContainer /*store={props.store}*//>}/>
-                    <Route path='/profile' render={() => <Profile /*store={props.store}*/
+                    <Route path='/profile' render={() => <ProfileContainer /*store={props.store}*/
                     />}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/users' render={() => <UsersContainer/>}/>
