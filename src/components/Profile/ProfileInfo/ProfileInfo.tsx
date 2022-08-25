@@ -14,7 +14,8 @@ export const  ProfileInfo =(props: ProfileInfoPropsType) =>{
     return (
         <div>
             <div>
-                <img src="https://anjalisk96.files.wordpress.com/2017/09/top-social-networking-sites.jpg?w=693&zoom=2" alt="social-network"/>
+                <img src="https://anjalisk96.files.wordpress.com/2017/09/top-social-networking-sites.jpg?w=693&zoom=2"
+                     alt="social-network"/>
             </div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large}/>

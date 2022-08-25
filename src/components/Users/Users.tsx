@@ -17,15 +17,15 @@ export const Users = (props: UsersType) => {
     let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
 
     let pages = []
-    for (let i = 1; i < 10; i++) {  // pagesCount поменял на 10
+    for (let i = 1; i < pagesCount; i++) {  // pagesCount поменял на 10
         pages.push(i)
     }
 
     return (
         <div>
             <div>
-                {pages.map(p => {
-                    return <span className={props.currentPage === p ? styles.selectedPage : undefined}
+                {pages.map((p, index) => {
+                    return <span key={index} className={props.currentPage === p ? styles.selectedPage : undefined}
                                  onClick={(e) => {
                                      props.onPageChanged(p)
                                  }}
