@@ -8,6 +8,7 @@ import {Music} from "./components/Navbar/Music/Music";
 import {DialogsContainer} from "./components/Dialogs/Message/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 type AppProps = {
 
@@ -18,7 +19,7 @@ const App: React.FC<AppProps> = (props) => {
     return (
         <BrowserRouter> {/*нужно всё обернуть <BrowserRouter>, по другому не работает*/}
             <div className="app-wrapper">
-                <Header/>
+                <HeaderContainer/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
                    {/* <Route path='/sidebar' render={() => <Sidebar stateData={stateData.sidebar}/>}/>*/}
