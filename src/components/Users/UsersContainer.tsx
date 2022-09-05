@@ -5,7 +5,7 @@ import {
     followAC,
     setCurrentPageAC,
     setTotalUsersCountAC,
-    setUserAC, toggleIsFetchingAC,
+    setUserAC, toggleFollowingProgressAC, toggleIsFetchingAC,
     unFollowAC,
     UserType
 } from "../../redux/users-reducer";
@@ -18,7 +18,8 @@ type MapStateToPropsType = {
     pageSize: number,
     totalUserCount: number,
     currentPage: number,
-    isFetching: boolean
+    isFetching: boolean,
+    followingInProgress: Array <number>
 }
 type MapDispatchToPropsType = {
     follow: (userId: number) => void
@@ -27,6 +28,7 @@ type MapDispatchToPropsType = {
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
+    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
 }
 
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -37,7 +39,8 @@ const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
         pageSize: state.usersPage.pageSize,
         totalUserCount: state.usersPage.totalUserCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
@@ -94,6 +97,8 @@ class UsersContainer extends React.Component<UsersPropsType> {
                 onPageChanged={this.onPageChanged}
                 unFollow={this.props.unFollow}
                 follow={this.props.follow}
+                toggleFollowingProgress={this.props.toggleFollowingProgress}
+                followingInProgress={this.props.followingInProgress}
             />
         </>
     }
@@ -106,5 +111,6 @@ export default connect(mapStateToProps,
         setUsers: setUserAC,
         setCurrentPage: setCurrentPageAC,
         setTotalUsersCount: setTotalUsersCountAC,
-        toggleIsFetching: toggleIsFetchingAC
+        toggleIsFetching: toggleIsFetchingAC,
+        toggleFollowingProgress: toggleFollowingProgressAC
     })(UsersContainer)

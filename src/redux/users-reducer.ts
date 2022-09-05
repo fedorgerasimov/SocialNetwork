@@ -12,13 +12,15 @@ export type InitialStateType = {
     totalUserCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<number>
 }
 const initialState: InitialStateType = {
     users: [],
     pageSize: 5,
     totalUserCount: 0,
     currentPage: 2,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: []
 }
 
 export const usersReducer = (state: InitialStateType = initialState, action: ActionsUsersTypes): InitialStateType => {
@@ -49,6 +51,13 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
             return {
                 ...state, isFetching: action.isFetching
             }
+        case "TOGGLE_IS_FOLLOWING_FETCHING":
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)
+            }
         default:
             return state;
     }
@@ -61,6 +70,7 @@ export type ActionsUsersTypes =
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalUsersCountAC>
     | ReturnType<typeof toggleIsFetchingAC>
+    | ReturnType<typeof toggleFollowingProgressAC>
 
 export const followAC = (userId: number) => ({type: 'FOLLOW', userId} as const)
 export const unFollowAC = (userId: number) => ({type: 'UN-FOLLOW', userId} as const)
@@ -68,3 +78,4 @@ export const setUserAC = (users: Array<UserType>) => ({type: 'SET-USERS', users}
 export const setCurrentPageAC = (currentPage: number) => ({type: "SET-CURRENT-PAGE", currentPage} as const)
 export const setTotalUsersCountAC = (totalUsersCount: number) => ({type: "SET-TOTAL-USERS-COUNT", count: totalUsersCount} as const)
 export const toggleIsFetchingAC = (isFetching: boolean) => ({type: "TOGGLE_IS_FETCHING", isFetching} as const)
+export const toggleFollowingProgressAC = (isFetching: boolean, userId: number) => ({type: "TOGGLE_IS_FOLLOWING_FETCHING", isFetching, userId} as const)
