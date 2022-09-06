@@ -5,7 +5,7 @@ const instance = axios.create({ // чтобы не дублировать код
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/', // автоматически будет дописываться эта часть адреса
     headers: {
-        "API-KEY": 'd9fde7a4-b524-4dad-8a88-59a5dc879e47'
+        "API-KEY": '5389ff3b-d7dd-4e56-93f8-9b821932b354'
     }
 })
 

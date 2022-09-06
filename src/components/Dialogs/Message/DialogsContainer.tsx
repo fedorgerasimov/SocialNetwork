@@ -6,43 +6,22 @@ import {AppRootStateType} from "../../../redux/redux-store";
 
 
 let mapStateToProps = (state: AppRootStateType) => {
-    return{
-        dialogsPage: state.dialogsPage
+    return {
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth,
     }
 }
 let mapDispatchToProps = (dispatch: any) => {
-    return{
+    return {
         updateNewMessageBody: (body: any) => {
             dispatch(updateNewMessageBodyAC(body))
         },
         sendMessage: () => {
-             dispatch(sendMessageAC())
+            dispatch(sendMessageAC())
         }
     }
 }
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
-
-/*export const DialogsContainer = (props: DialogsProps) => {
-
-    return (
-        <StoreContext.Consumer>
-            {
-                (store: any) => {
-                    const onSendMessageClick = () => {
-                        store.dispatch(sendMessageAC())
-                    }
-
-                    const onNewMessageChange = (body: string) => {
-                        store.dispatch(updateNewMessageBodyAC(body))
-                    }
-
-                    return <Dialogs updateNewMessageBody={onNewMessageChange}
-                                    sendMessage={onSendMessageClick}
-                                    store={store}
-                    />
-                }
-            }
-        </StoreContext.Consumer>
-    )
-}*/
+export const DialogsContainer = connect(mapStateToProps,
+    mapDispatchToProps)
+(Dialogs)
