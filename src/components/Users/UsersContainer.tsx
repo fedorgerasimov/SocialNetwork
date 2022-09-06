@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {
-    follow,
-    getUsers,
+    followThunkCreator,
+    getUsersThunkCreator,
     setCurrentPageAC, toggleFollowingProgressAC,
-    unFollow,
+    unFollowThunkCreator,
     UserType
 } from "../../redux/users-reducer";
 import {Users} from "./Users";
@@ -95,7 +95,7 @@ export default connect(mapStateToProps,
     {
         setCurrentPage: setCurrentPageAC,
         toggleFollowingProgress: toggleFollowingProgressAC,
-        follow: follow,
-        unFollow: unFollow,
-        getUsers: getUsers
+        follow: followThunkCreator,
+        unFollow: unFollowThunkCreator,
+        getUsers: getUsersThunkCreator
     })(UsersContainer)

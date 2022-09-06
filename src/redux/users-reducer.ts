@@ -88,9 +88,7 @@ export const toggleFollowingProgressAC = (isFollowing: boolean, userId: number) 
 }
 
 
-
-
-export const getUsers = (currentPage: number, pageSize: number) => {
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
     return (dispatch: any) => {
         {
             dispatch(toggleIsFetchingAC(true))
@@ -104,7 +102,7 @@ export const getUsers = (currentPage: number, pageSize: number) => {
     }
 }
 
-export const follow = (userId: number) => {
+export const followThunkCreator = (userId: number) => {
     return (dispatch: any) => {
         dispatch(toggleFollowingProgressAC(true, userId))
         usersAPI.followUsers(userId)
@@ -117,7 +115,7 @@ export const follow = (userId: number) => {
     }
 }
 
-export const unFollow = (userId: any) => {
+export const unFollowThunkCreator = (userId: any) => {
     return (dispatch: any) => {
         dispatch(toggleFollowingProgressAC(true, userId))
         usersAPI.unFollowUsers(userId)

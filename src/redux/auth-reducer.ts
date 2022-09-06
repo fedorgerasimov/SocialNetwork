@@ -1,3 +1,5 @@
+import {authAPI} from "../api/api";
+
 type AuthStateType = {
     id: null | number,
     email: null | string,
@@ -27,3 +29,12 @@ export type ActionsAuthTypes =
 
 export const setAuthUserDataAC = (id: number, email: string, login: string) =>
     ({type: 'SET-USER-DATA', data: {id, email, login}} as const)
+
+export const getAuthUserDataThunkCreator = () => (dispatch: any) =>{
+     authAPI.me().then(response => {
+                if (response.data.resultCode === 0) {
+                    let {id, email, login} = response.data.data
+                    dispatch(setAuthUserDataAC(id, email, login))
+                }
+            })
+}

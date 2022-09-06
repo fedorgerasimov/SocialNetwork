@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 type ProfileContactsType = {
     "facebook": string | null
     "website": string | null
@@ -20,7 +22,7 @@ export type ProfileType = {
     "lookingForAJob": boolean
     "lookingForAJobDescription": string
     "fullName": string
-    "userId": number
+    "userId": string
     "photos": ProfilePhotoType
 }
 
@@ -33,7 +35,7 @@ export type PostsType = {
 export type ProfilePageType = {
     posts: Array<PostsType>
     messageForNewPost: string
-    profile:null | ProfileType
+    profile: null | ProfileType
 }
 
 let initialState: ProfilePageType = {
@@ -92,8 +94,13 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
 export type ActionsProfileTypes =
     ReturnType<typeof addPostAC>
     | ReturnType<typeof updateNewPostTextAC>
-|ReturnType<typeof setUserProfileAC>
+    | ReturnType<typeof setUserProfileAC>
 
 export const addPostAC = () => ({type: 'ADD-POST',} as const)
 export const updateNewPostTextAC = (newText: string) => ({type: 'UPDATE-NEW-POST-TEXT', newText} as const)
 export const setUserProfileAC = (profile: ProfileType) => ({type: 'SET-USER-PROFILE', profile} as const)
+export const getUserProfileThunkCreator = (userId: string) => (dispatch: any) => {
+          usersAPI.getProfile(userId).then(response => {
+                dispatch(setUserProfileAC(response.data))
+          })
+}
