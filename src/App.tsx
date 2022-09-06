@@ -16,6 +16,7 @@ type AppProps = {
 
 const App: React.FC<AppProps> = (props) => {
     //const stateData = props.store.getState()
+
     return (
         <BrowserRouter> {/*нужно всё обернуть <BrowserRouter>, по другому не работает*/}
             <div className="app-wrapper">

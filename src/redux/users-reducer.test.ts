@@ -1,4 +1,4 @@
-import {followAC, unFollowAC, usersReducer, UserType} from "./users-reducer";
+import { followSuccessAC, unFollowSuccessAC, usersReducer, UserType} from "./users-reducer";
 
 
 let initialState: any//InitialStateType
@@ -31,11 +31,11 @@ beforeEach(() => {
 })
 
 test('correct status followed should be changed', () => {
-    let endState = usersReducer(initialState, followAC(userId2))
+    let endState = usersReducer(initialState,  followSuccessAC(userId2))
     expect(endState.users.length).toBe(3);
     expect(endState.users[0].followed).toBe(false)
 
-    endState = usersReducer(initialState, unFollowAC(3))
+    endState = usersReducer(initialState, unFollowSuccessAC(3))
     expect(endState.users[2].followed).toBe(false)
 })
 
