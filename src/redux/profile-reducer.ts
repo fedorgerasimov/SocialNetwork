@@ -1,4 +1,4 @@
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 
 type ProfileContactsType = {
     "facebook": string | null
@@ -36,6 +36,7 @@ export type ProfilePageType = {
     posts: Array<PostsType>
     messageForNewPost: string
     profile: null | ProfileType
+    status: string
 }
 
 let initialState: ProfilePageType = {
@@ -61,6 +62,7 @@ let initialState: ProfilePageType = {
         }
     ] as Array<PostsType>,
     profile: null,
+    status: ""
 }
 
 export type InitialStateType = typeof initialState
@@ -86,6 +88,9 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
         case 'SET-USER-PROFILE': {
             return {...state, profile: action.profile}
         }
+        case 'SET-STATUS': {
+            return {...state, status: action.status}
+        }
         default:
             return state;
     }
@@ -95,12 +100,30 @@ export type ActionsProfileTypes =
     ReturnType<typeof addPostAC>
     | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof setUserProfileAC>
+    | ReturnType<typeof setStatusAC>
 
 export const addPostAC = () => ({type: 'ADD-POST',} as const)
 export const updateNewPostTextAC = (newText: string) => ({type: 'UPDATE-NEW-POST-TEXT', newText} as const)
 export const setUserProfileAC = (profile: ProfileType) => ({type: 'SET-USER-PROFILE', profile} as const)
+export const setStatusAC = (status: string) => ({type: 'SET-STATUS', status} as const)
+
 export const getUserProfileThunkCreator = (userId: string) => (dispatch: any) => {
-          usersAPI.getProfile(userId).then(response => {
-                dispatch(setUserProfileAC(response.data))
-          })
+    usersAPI.getProfile(userId).then(response => {
+        dispatch(setUserProfileAC(response.data))
+    })
+}
+
+export const getStatusThunkCreator = (userId: string) => (dispatch: any) => {
+    profileAPI.getStatus(userId).then(response => {
+        dispatch(setStatusAC(response.data))
+    })
+}
+
+export const updateStatusThunkCreator = (status: string) => (dispatch: any) => {
+    profileAPI.updateStatus(status)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setStatusAC(status))
+            }
+        })
 }
