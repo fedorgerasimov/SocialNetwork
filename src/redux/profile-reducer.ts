@@ -34,13 +34,11 @@ export type PostsType = {
 }
 export type ProfilePageType = {
     posts: Array<PostsType>
-    messageForNewPost: string
     profile: null | ProfileType
     status: string
 }
 
 let initialState: ProfilePageType = {
-    messageForNewPost: '',
     posts: [
         {
             id: 1,
@@ -72,19 +70,16 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
         case 'ADD-POST': {
             let newPost = {
                 id: 5,
-                message: state.messageForNewPost,
+                message: action.messageForNewPost,
                 likesCount: 5,
                 avatar: 'https://cdn4.iconfinder.com/data/icons/emojis-flat-pixel-perfect/64/emoji-64-512.png'
             }
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                messageForNewPost: ''
             }
         }
-        case 'UPDATE-NEW-POST-TEXT': {
-            return {...state, messageForNewPost: action.newText}
-        }
+
         case 'SET-USER-PROFILE': {
             return {...state, profile: action.profile}
         }
@@ -98,12 +93,10 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
 
 export type ActionsProfileTypes =
     ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof setStatusAC>
 
-export const addPostAC = () => ({type: 'ADD-POST',} as const)
-export const updateNewPostTextAC = (newText: string) => ({type: 'UPDATE-NEW-POST-TEXT', newText} as const)
+export const addPostAC = (messageForNewPost: string) => ({type: 'ADD-POST', messageForNewPost} as const)
 export const setUserProfileAC = (profile: ProfileType) => ({type: 'SET-USER-PROFILE', profile} as const)
 export const setStatusAC = (status: string) => ({type: 'SET-STATUS', status} as const)
 

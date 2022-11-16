@@ -1,14 +1,34 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './MyPosts.module.css'
 import Post from "./Posts/Post";
 import {PostsType,} from "../../../redux/store";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../../utils/validators/validators";
+import {Textarea} from "../../common/FormsControls/FormsControls";
+
+const maxLength10 = maxLengthCreator(10)
 
 type MyPostsProps = {
     posts: Array<PostsType>
-    messageForNewPost: string
-    addPostCallback: () => void
-    updateNewPostTextCallback: (newText: string) => void
+    addPostCallback: (messageForNewPost: string) => void
 }
+
+type FormDataType = {messageForNewPost: string}
+const AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field component={Textarea} name={"messageForNewPost"} placeholder={"Post message"}
+                       validate = {[required, maxLength10]}/>
+            </div>
+            <div>
+                <button>Add post</button>
+                <button>Remove</button>
+            </div>
+        </form>
+    )
+}
+const AddNewPostFormRedux = reduxForm<FormDataType>({form: "addNewPostForm"})(AddNewPostForm)
 
 const MyPosts = (props: MyPostsProps) => {
 
@@ -18,42 +38,16 @@ const MyPosts = (props: MyPostsProps) => {
               likesCount={el.likesCount}
               avatar={el.avatar}/>)
 
-
-
-    const onAddPostHandler = () => {
-        props.addPostCallback()
+    const addNewPost = (values: any) => {
+        props.addPostCallback(values.messageForNewPost)
     }
-
-  /*  let newPostElement = React.createRef<HTMLTextAreaElement>()
-    const onChangePostHandler = () => {
-        let text = ''
-        if (newPostElement.current?.value) text = newPostElement.current?.value
-        props.updateNewPostTextCallback(text)
-    }*/
-    const onChangePostHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewPostTextCallback(event.currentTarget.value)
-    }
-
     return (
         <div className={s.postsBlock}>
             <h2>My posts</h2>
-            <div>
-                <div>
-                    <textarea
-                        onChange={onChangePostHandler}
-                        //ref={newPostElement}
-                        value={props.messageForNewPost}
-                    />
-                </div>
-                <div>
-                    <button onClick={onAddPostHandler}>Add post</button>
-                    <button>Remove</button>
-                </div>
-
-            </div>
             <div className={s.posts}>
                 {postsElement}
             </div>
+            <AddNewPostFormRedux onSubmit={addNewPost}/>
         </div>
     )
 }
